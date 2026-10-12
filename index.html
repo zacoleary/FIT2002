@@ -39,7 +39,7 @@ em{font-style:normal}
 .side::after{content:"";position:absolute;right:-1px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--violet),transparent 38%);opacity:.7;pointer-events:none}
 .brand{display:flex;align-items:center;gap:10px;padding:0 6px;font-weight:600;font-size:15px;letter-spacing:-.02em}
 .logo{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--violet),var(--cyan));box-shadow:0 0 22px -4px rgba(139,92,246,.8);color:#08080a}
-.mode{display:grid;grid-template-columns:1.4fr 1fr;gap:4px;padding:4px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
 .mode button{height:32px;border-radius:8px;font-size:13px;font-weight:500;color:var(--dim);display:flex;align-items:center;justify-content:center;gap:8px;transition:color .2s,background .2s}
 .mode button:hover{color:var(--text)}
 .mode button.on{color:#fff;background:linear-gradient(180deg,rgba(139,92,246,.28),rgba(139,92,246,.1));box-shadow:inset 0 0 0 1px rgba(139,92,246,.5),0 0 20px -6px rgba(139,92,246,.8)}
@@ -364,7 +364,6 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 
 /* ---------- auth, client, wallet ---------- */
 .foot{margin-top:auto;display:grid;gap:8px}
-.mode.client{grid-template-columns:1fr 1.4fr}
 .mode.client button.on{background:linear-gradient(180deg,rgba(34,211,238,.24),rgba(34,211,238,.08));box-shadow:inset 0 0 0 1px rgba(34,211,238,.5),0 0 20px -6px rgba(34,211,238,.8)}
 .mode.client .mdot{background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse-c 2.4s infinite}
 .authtabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.02);margin-bottom:22px}
@@ -670,7 +669,7 @@ function renderSide(){
   const nav=client?NAV_CLIENT:NAV;
   $('#nav').innerHTML=nav.map(n=>`<button class="nav-item ${S.view===n.v?'on':''}" data-action="nav" data-view="${n.v}" ${S.view===n.v?'aria-current="page"':''}>${icon(n.i,18)}<span>${n.t}</span>${n.lock&&S.status!=='verified'?`<span class="lk" title="Unlocks after verification">${icon('lock',13)}</span>`:''}</button>`).join('');
   const m=$('#mode');m.className='mode'+(client?' client':'');
-  m.innerHTML=`<button class="${client?'':'on'}" data-action="mode" data-m="builder" aria-pressed="${!client}">${client?'':'<i class="mdot"></i>'}${client?'Builder':'Builder Mode'}</button><button class="${client?'on':''}" data-action="mode" data-m="client" aria-pressed="${client}">${client?'<i class="mdot"></i>Client Mode':'Client'}</button>`;
+  m.innerHTML=`<button class="${client?'':'on'}" data-action="mode" data-m="builder" aria-pressed="${!client}">${client?'':'<i class="mdot"></i>'}Builder</button><button class="${client?'on':''}" data-action="mode" data-m="client" aria-pressed="${client}">${client?'<i class="mdot"></i>':''}Client</button>`;
   const nm=(client?S.account.name:(S.profile.name||S.account?.name))||'Guest';
   const st=client?'Client Account':{draft:'Draft Profile',review:'In Review',verified:'Verified Builder',changes:'Changes Requested'}[S.status];
   const w=$('#who');w.dataset.view=client?'settings':'profile';
